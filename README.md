@@ -1,1 +1,1 @@
-valinsky.me
+[Valinsky's Blog](valinsky.dev)

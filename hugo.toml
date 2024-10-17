@@ -1,6 +1,6 @@
-baseURL = 'https://valinsky.me/'
+baseURL = 'https://valinsky.dev/'
 languageCode = 'en-us'
-title = "Vali's blog"
+title = "Valinsky"
 theme = 'holy'
 DefaultContentLanguage = "en"
 # enableInlineShortcodes = true
