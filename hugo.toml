@@ -1,4 +1,16 @@
 baseURL = 'https://valinsky.me/'
 languageCode = 'en-us'
-title = 'valinsky.me'
+title = "Vali's blog"
 theme = 'holy'
+DefaultContentLanguage = "en"
+# enableInlineShortcodes = true
+
+[params]
+  copyright = "© Valinsky"
+
+[menu]
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/about/"
+    weight = 10
