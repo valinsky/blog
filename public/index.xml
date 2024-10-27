@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Vali&#39;s blog</title>
+    <title>Valinsky</title>
     <link>http://localhost:1313/</link>
-    <description>Recent content on Vali&#39;s blog</description>
+    <description>Recent content on Valinsky</description>
     <generator>Hugo</generator>
-    <language>en-us</language>
-    <lastBuildDate>Thu, 17 Oct 2024 15:41:08 -0400</lastBuildDate>
+    <language>en</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Fri, 17 Oct 2014 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hello World</title>
-      <link>http://localhost:1313/posts/my-first-post/</link>
-      <pubDate>Thu, 17 Oct 2024 15:41:08 -0400</pubDate>
-      <guid>http://localhost:1313/posts/my-first-post/</guid>
+      <link>http://localhost:1313/posts/hello-world/</link>
+      <pubDate>Fri, 17 Oct 2014 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/hello-world/</guid>
       <description>&lt;p&gt;Hello World&lt;/p&gt;</description>
     </item>
     <item>
@@ -20,7 +21,7 @@
       <link>http://localhost:1313/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/about/</guid>
-      <description>&lt;p&gt;TDB&amp;hellip;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Hi, I&amp;rsquo;m Vali. I&amp;rsquo;m a software engineer.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

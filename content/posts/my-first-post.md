@@ -1,6 +1,13 @@
-+++
-date = '2024-10-17T15:41:08-04:00'
-draft = false
-title = 'Hello World'
-+++
+---
+date: 2014-10-17
+linktitle: Hello World
+title: Hello World
+type:
+- post
+- posts
+series:
+- hello world
+aliases:
+- /blog/hello-world/
+---
 Hello World

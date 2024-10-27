@@ -1,5 +1,5 @@
 +++
-type = 'page'
-title = 'About'
+title = "About"
 +++
-TDB...
+
+Hi, I'm Vali. I'm a software engineer.
