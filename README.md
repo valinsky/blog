@@ -1,1 +1,1 @@
-[Valinsky's Blog](valinsky.dev)
+[Valinsky's Blog](https://valinsky.dev)
