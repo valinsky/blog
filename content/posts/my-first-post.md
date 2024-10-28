@@ -10,4 +10,4 @@ series:
 aliases:
 - /blog/hello-world/
 ---
-Hello World
+Hello World!
