@@ -51,15 +51,18 @@ languages:
       homeInfoParams:
         Title: Hey!
         Content: >
-          I'm Vali, a senior software engineer with a love for Python and distributed systems.
+          I'm Vali, a senior software engineer with a love for clean code, teaching and writing.
       social: true  # workaround until https://github.com/adityatelange/hugo-PaperMod/pull/1620 is merged
       socialIcons:
+        - name: email
+          url: mailto:contact@valinsky.me
         - name: github
           url: https://github.com/valinsky
         - name: linkedin
           url: https://www.linkedin.com/in/dumitruvaleriuvoicu
-        - name: email
-          url: mailto:contact@valinsky.me
+    #   - name: KoFi
+    #     title: Buy me a Ko-Fi :)
+    #     url: "https://ko-fi.com/adityatelange"
 
 outputs:
   home:

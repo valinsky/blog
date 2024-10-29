@@ -4,8 +4,6 @@ date: 2024-09-15
 # weight: 1
 # aliases: ["/first"]
 # tags: ["first"]
-# author: "Me"
-# author: ["Me", "You"] # multiple authors
 showToc: false
 TocOpen: false
 draft: false

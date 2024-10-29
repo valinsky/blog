@@ -26,4 +26,11 @@ ShowRssButtonInSectionTermList: false
 UseHugoToc: false
 ---
 
-TBD...
+I'm a senior software engineer mainly focusing on backend technologies. I specialize in distributed systems architecture, database management, scalable REST APIs, and AWS.
+
+I've worked in senior positions at organizations like Verizon, EAB and currently Anaconda.
+
+I'm passionate about clean code, teaching and writing, and I'm using this blog as an opportunity to showcase and further develop these skills.
+
+This blog has no ads, no affiliate links, no tracking or analytics, no sponsored posts, and no paywall. The idea was to create a no bs blog where I freely share what I've learned throughout the years.
+
