@@ -50,12 +50,12 @@ languages:
     params:
       homeInfoParams:
         Title: Hey!
-        Content: >
-          I'm Vali, a senior software engineer with a love for clean code, teaching and writing.
+        Content: I'm Vali, a senior software engineer with a love for clean code, teaching and writing.
+
       social: true  # workaround until https://github.com/adityatelange/hugo-PaperMod/pull/1620 is merged
       socialIcons:
         - name: email
-          url: mailto:contact@valinsky.me
+          url: mailto:blog@valinsky.me
         - name: github
           url: https://github.com/valinsky
         - name: linkedin
