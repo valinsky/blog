@@ -1,5 +1,5 @@
 ---
-title: About
+title: About Me
 # date: 2024-09-15T11:30:03+00:00
 # weight: 1
 # aliases: ["/first"]
@@ -33,3 +33,8 @@ I've worked in senior positions at organizations like Verizon, EAB and currently
 I'm passionate about clean code, teaching and writing, and I'm using this blog as an opportunity to showcase and further develop these skills.
 
 This website is free of ads, affiliate links, tracking, analytics, sponsored posts, and paywalls. My goal is to create a no bs blog where I can freely share what I've learned over the years.
+
+### Contact
+  - [Email](mailto:blog@valinsky.me)
+  - [Github](https://github.com/valinsky)
+  - [Linkedin](https://www.linkedin.com/in/dumitruvaleriuvoicu)
