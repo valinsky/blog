@@ -48,6 +48,10 @@ languages:
 
     # custom params for each language should be under [langcode].parms - hugo v0.120.0
     params:
+      assets:
+        favicon: static/favicon.ico
+        favicon16x16: static/favicon16x16.png
+        favicon32x32: static/favicon32x32.png
       homeInfoParams:
         Title: Hey!
         Content: I'm Vali, a senior software engineer with a love for clean code, teaching and writing.
