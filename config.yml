@@ -50,21 +50,16 @@ languages:
     params:
       homeInfoParams:
         Title: Hey!
-        Content: |-
+        Content: >
           I'm Vali, a senior software engineer with a love for Python and distributed systems.
-
-          - <u>[GitHub](https://github.com/valinsky)</u>
-
-          - <u>[LinkedIn](https://www.linkedin.com/in/dumitruvaleriuvoicu)</u>
-
-          - <u>[Email](mailto:contact@valinsky.me)</u>
-      social:
-        - name: email
-          url: mailto:contact@valinsky.me
+      social: true  # workaround until https://github.com/adityatelange/hugo-PaperMod/pull/1620 is merged
+      socialIcons:
         - name: github
           url: https://github.com/valinsky
         - name: linkedin
           url: https://www.linkedin.com/in/dumitruvaleriuvoicu
+        - name: email
+          url: mailto:contact@valinsky.me
 
 outputs:
   home:
