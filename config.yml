@@ -53,7 +53,7 @@ languages:
     params:
       homeInfoParams:
         Title: Hey
-        Content: I'm Vali, a Senior Software Engineer with a love for clean code, teaching and writing.
+        Content: I'm Vali, a Senior Software Engineer with a love for clean code, knowledge sharing and writing.
 
       social: true  # workaround until https://github.com/adityatelange/hugo-PaperMod/pull/1620 is merged
       socialIcons:
