@@ -28,11 +28,13 @@ UseHugoToc: false
 
 I'm a Senior Software Engineer with a focus on backend technologies. I specialize in distributed systems architecture, database management, scalable REST APIs, Python, and AWS.
 
-I've worked in senior positions at organizations like Verizon, EAB and currently Anaconda.
+I've held senior roles at multiple organizations, including Verizon, EAB, and currently Anaconda.
 
 I'm passionate about clean code, knowledge sharing and writing, and I'm using this blog as an opportunity to showcase and further develop these skills.
 
-This website is free of ads, affiliate links, tracking, analytics, sponsored posts, and paywalls. My goal is to create a no bs blog where I can freely share what I've learned over the years.
+### Website
+
+This website is powered by [Hugo](https://gohugo.io/) and [PaperMod](https://github.com/adityatelange/hugo-PaperMod) and is hosted on [GitHub Pages](https://pages.github.com/). It's free of ads, affiliate links, tracking, analytics, sponsored posts, and paywalls. My goal is to create a no bs, content-first blog where I can freely share what I've learned over the years.
 
 ### Contact
   - [Email](mailto:blog@valinsky.me)
