@@ -63,9 +63,9 @@ languages:
           url: https://github.com/valinsky
         - name: linkedin
           url: https://www.linkedin.com/in/dumitruvaleriuvoicu
-    #   - name: KoFi
-    #     title: Buy me a Ko-Fi :)
-    #     url: "https://ko-fi.com/adityatelange"
+        # - name: KoFi
+          # title: Buy me a Ko-Fi :)
+          # url: "https://ko-fi.com/adityatelange"
 
 outputs:
   home:

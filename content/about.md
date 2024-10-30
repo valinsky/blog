@@ -32,11 +32,8 @@ I've held senior roles at multiple organizations, including Verizon, EAB, and cu
 
 I'm passionate about clean code, knowledge sharing and writing, and I'm using this blog as an opportunity to showcase and further develop these skills.
 
+{{< social_icons >}}
+
 ### Website
 
 This website is powered by [Hugo](https://gohugo.io/) and [PaperMod](https://github.com/adityatelange/hugo-PaperMod) and is hosted on [GitHub Pages](https://pages.github.com/). It's free of ads, affiliate links, tracking, analytics, sponsored posts, and paywalls. My goal is to create a no bs, content-first blog where I can freely share what I've learned over the years.
-
-### Contact
-  - [Email](mailto:blog@valinsky.me)
-  - [Github](https://github.com/valinsky)
-  - [Linkedin](https://www.linkedin.com/in/dumitruvaleriuvoicu)
