@@ -2,16 +2,10 @@
 <footer class="footer">
     {{- if not site.Params.footer.hideCopyright }}
         {{- if site.Copyright }}
-        <span>{{ site.Copyright | markdownify }} {{ now.Year }}</span>
+        <span>{{ site.Copyright | markdownify }} {{- print " · "}} {{ now.Year }}</span>
         {{- else }}
         <span>&copy; {{ now.Year }} <a href="{{ "" | absLangURL }}">{{ site.Title }}</a></span>
         {{- end }}
-        {{- print " · "}}
-    {{- end }}
-
-    {{- with site.Params.footer.text }}
-        {{ . | markdownify }}
-        {{- print " · "}}
     {{- end }}
 </footer>
 {{- end }}
