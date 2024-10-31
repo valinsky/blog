@@ -1,7 +1,7 @@
 ---
 date: 2024-10-31
 title: ...or else
-draft: true
+draft: false
 # weight: 1
 # aliases: ["/first"]
 tags:
