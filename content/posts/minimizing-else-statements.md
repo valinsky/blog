@@ -1,6 +1,6 @@
 ---
 date: 2024-10-31
-title: ...or else
+title: Minimizing the usage of else statements
 draft: false
 # weight: 1
 # aliases: ["/first"]
