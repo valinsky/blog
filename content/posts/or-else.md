@@ -69,28 +69,18 @@ The `if / else` would conditionally segregate the functions.
 ```python
 if condition:
     func1()
-    func2()
 else:
-    func3()
-    func4()
+    func2()
 ```
 
-In this situation we can't use the same pattern as `Examples 1`, because that would default to calling `func3()` and `func4()` before checking the condition, and we don't want that. Instead, we can remove `else` and ensure a default by using a dictionary and its `.get()` method.
+In this situation we can't use the same pattern used in `Examples 1`, because that would default to calling `func2()` before checking the condition, and we don't want that. Instead, we can remove `else` and ensure a default by using a dictionary and its associated `.get()` method.
 
 ```python
-def func_1_2():
-    func1()
-    func2()
+func = {
+    condition: func1
+}.get(condition, func2)
 
-def func_3_4():
-    func3()
-    func4()
-
-run_funcs = {
-    condition: func_1_2
-}.get(condition, func_2_3)
-
-run_funcs()
+func()
 ```
 
 ### Example 4
