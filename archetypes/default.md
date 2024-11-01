@@ -1,11 +1,11 @@
 ---
 date: '{{ .Date }}'
-draft: true
 title: '{{ replace .File.ContentBaseName "-" " " | title }}'
+draft: true
 showToc: true
 TocOpen: false
 hidemeta: false
-comments: false
+comments: true
 # description: "Desc Text."
 # canonicalURL: "https://canonical.url/to/page"
 disableHLJS: true # to disable highlightjs
