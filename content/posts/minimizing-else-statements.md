@@ -4,9 +4,7 @@ title: Minimizing the usage of else statements
 draft: false
 # weight: 1
 # aliases: ["/first"]
-tags:
-    - "clean code"
-    - "python"
+tags: ["clean code", "python"]
 showToc: false
 TocOpen: false
 hidemeta: false
