@@ -1,7 +1,7 @@
 # If your site is in 'https', then make sure your base url isn't written using 'http' otherwise your sitemap would
 # contain http (as opposeed to https) URLs. This would affect Google indexing of your URLs.
 baseURL: "https://valinsky.dev/"
-title: Valinsky
+title: Valinsky - Insights into Software Engineering
 copyright: "© Valinsky"
 theme: [PaperMod]
 
@@ -93,7 +93,7 @@ params:
   ShowPageNums: true
   ShowToc: true
   comments: true
-  # images: ["images/papermod-cover.png"]
+  # images: ["triangle.png"]
 
   # profileMode:
   #   enabled: false
@@ -138,11 +138,11 @@ params:
   #   Text: "Suggest Changes" # edit text
   #   appendFilePath: true # to append file path to Edit link
 
-  # label:
+  label:
   # iconSVG: '<svg xmlns="http://www.w3.org/2000/svg" height="25" viewBox="0 -960 960 960" fill="currentColor"><path d="M320-240h320v-80H320v80Zm0-160h320v-80H320v80ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z"/></svg>'
-  # text: "Home"
-  # icon: icon.png
-  # iconHeight: 35
+    text: Valinsky
+    # icon: triangle.png
+    # iconHeight: 35
 
   # analytics:
   #     google:
