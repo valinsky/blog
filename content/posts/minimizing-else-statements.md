@@ -2,13 +2,13 @@
 date: 2024-10-31
 title: Minimizing the usage of else statements
 draft: false
+comments: true
 # weight: 1
 # aliases: ["/first"]
 tags: ["clean code", "python"]
 showToc: false
 TocOpen: false
 hidemeta: false
-comments: true
 # description: "Desc Text."
 # canonicalURL: "https://canonical.url/to/page"
 disableHLJS: true # to disable highlightjs
