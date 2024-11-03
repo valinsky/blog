@@ -34,7 +34,7 @@ languages:
           - name: About
             url: about
             weight: 5
-          - name: Blog
+          - name: Posts
             url: posts
             weight: 4
         # - name: Archive
