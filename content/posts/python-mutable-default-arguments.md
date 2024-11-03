@@ -74,8 +74,8 @@ I had to deal with a similar situation when writing an [AWS Lambda function](htt
 ```python
 class S3MultipartUploader:
     def __init__(self, parts=[]):
-        self.s3_client = boto3.client('s3')
         self.parts = parts
+        self.s3_client = boto3.client('s3')
 
     def upload_part(self, part):
         part_number = len(self.parts) + 1
@@ -108,4 +108,6 @@ def __init__(self, parts=None):
     self.parts = [] if parts is None else parts
 ```
 
-Beware of Python's mutable default arguments.
+### Conclusion
+
+Mutable default arguments are rarely needed, if ever. If you want your code to behave as you intend, avoid hours of debugging unexpected behavior, and ensure your peace of mind, it's best to avoid them and follow best practices. The alternative presented above is a reliable, battle-tested approach.
