@@ -2,7 +2,7 @@
 date: '{{ .Date }}'
 title: '{{ replace .File.ContentBaseName "-" " " | title }}'
 draft: true
-comments: true
+comments: false
 showToc: true
 TocOpen: false
 hidemeta: false
