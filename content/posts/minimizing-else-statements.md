@@ -117,5 +117,3 @@ That said, if using `else` seems to be the only option, more than likely there's
 ### Conclusion
 
 One of the primary reasons code bases become complicated and hard to maintain is the excessive use of `else` statements, particularly when they are nested. For your peace of mind and that of your teammates, and for enhancing your developer skills, it's highly recommended to minimize its usage. And when you do use it, use it wisely.
-
-As a side note, `else` can freely be used with `except` statements and `for` loops, since that's not conditional branching.
