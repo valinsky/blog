@@ -1,6 +1,6 @@
 ---
 date: '2024-11-01'
-title: 'Beware of Python''s mutable default arguments'
+title: 'Beware of Python''s Mutable Default Arguments Anti-Pattern'
 draft: true
 comments: true
 showToc: false

@@ -1,5 +1,5 @@
 ---
-title: Python can't distinguish between NULL and empty strings in CSVs
+title: "The Pitfalls of NULLs and Empty Strings in Python's CSV Handling"
 date: 2024-11-03
 draft: true
 tags: ["python"]

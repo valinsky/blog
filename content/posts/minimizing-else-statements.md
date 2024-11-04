@@ -1,6 +1,6 @@
 ---
 date: 2024-10-31
-title: Minimizing the usage of else statements
+title: Reduce Else Statements to Improve Code Quality
 draft: false
 comments: true
 # weight: 1
