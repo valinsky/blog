@@ -1,5 +1,5 @@
 ---
-date: '2024-11-05'
+date: '2024-11-06'
 title: 'Beware of Python''s Mutable Default Arguments Anti-Pattern'
 draft: false
 comments: true
@@ -98,7 +98,7 @@ def lambda_handler(event, context):
     multipart_uploader.complete_upload()
 ```
 
-The code defines a `S3MultipartUploader` class that uploads data in chunks, and then completes the upload. And it was working great, until it didn't. At random times the Lambda would throw an error with the following message:
+The code defines a `S3MultipartUploader` class that uploads data in chunks, and then completes the upload. And it was working great, until it didn't. At random times the Lambda would throw the following error:
 `"An error occurred (InvalidPart) when calling the CompleteMultipartUpload operation: One or more of the specified parts could not be found."`. After some debugging, I discovered that the issue originated from a combination of mutable default arguments and [Lambda container reusage](https://aws.amazon.com/blogs/compute/container-reuse-in-lambda/).
 
 The `__init__` method was using a mutable default argument by setting `parts` to an empty list. When the Lambda had a cold start in a new container, `multipart_uploader` was instantiated with `parts` as an empty list and there were no issues. However, when the Lambda was reusing a previous container, `parts` retained data from that container. As a result, `multipart_uploader` was instantiated with leftover data from a previous execution context, similar to our first example where `list2 = append_to_list(2)` was reusing a non-empty `my_list` that was mutated in a previous function call. This led to `multipart_uploader` attempting to complete the upload with parts that didn't exist in the current execution context, causing the Lambda to fail.
