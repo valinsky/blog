@@ -35,7 +35,7 @@ Let's write a simple Python script that reads the CSV file:
 
 ```python
 from csv import DictReader
-row_list = list(DictReader(open('csv_file', 'r')))
+row_list = list(DictReader(open('input_csv', 'r')))
 print(row_list)
 ```
 
@@ -43,15 +43,16 @@ The output for `row_list` is:
 
 `[{'a': 'some string', 'b': '', 'c': ''}]`
 
-Notice that both `b` and `c` have similar values, the empty string. As far as Python is concerned, these 2 columns are no different, even though their values were different in the original CSV.
+Notice that both `b` and `c` have similar values, the **empty string**. As far as Python is concerned, these 2 columns are no different, even though their values were different in the original CSV.
 
-Let's write `row_list` to another CSV file:
+Now let's write `row_list` to another CSV file:
 
 ```python
 from csv import DictReader, DictWriter
-row_list = list(DictReader(open('csv_file', 'r')))
+row_list = list(DictReader(open('input_csv', 'r')))
 print(row_list)
-writer = DictWriter(open('csv_file_processed', 'w'), fieldnames=['a', 'b', 'c', ])
+
+writer = DictWriter(open('output_csv', 'w'), fieldnames=['a', 'b', 'c', ])
 writer.writeheader()
 writer.writerows(row_list)
 ```
@@ -63,15 +64,20 @@ a,b,c
 some string,,
 ```
 
-Both `b` and `c` columns now have a NULL value.
+Both `b` and `c` columns now have a **NULL value**.
 
-So `b` and `c` started out as NULL and empty string, were both read as empty strings, and are now written as NULLs. What a mess! This issue is discussed [here](https://bugs.python.org/issue23041).
+So `b` and `c` started out as NULL and empty string, were both read as empty strings, and are now written as NULLs. This is a mess! This issue is discussed [here](https://bugs.python.org/issue23041).
 
 ## My personal experience with this issue
 
-I worked on a service that reads CSV files, processes the data, writes the processed data to other CSV files, and [copies](https://www.postgresql.org/docs/9.2/sql-copy.html) the processed files into a PostgreSQL table. The intake PostgreSQL table was defined to accept NULL values for columns `b`, and to not accept NULL values for column `c`, although it could accept empty strings.
+I worked on a service that processed incoming CSVs, wrote the processed data to other CSVs, and then [copied](https://www.postgresql.org/docs/9.2/sql-copy.html) the files into a PostgreSQL table. The table was defined to accept NULL values for column `b`, and to not accept NULL values for column `c`, although it could accept empty strings.
 
-If we try to copy our initial file into this table there would be no copy issues since the data is valid relative to the table structure. On the other hand, if we try to copy the processed file, PostgreSQL would throw an exception:
+```python
+b = models.CharField(null=True, blank=True)
+c = models.CharField(null=False, blank=True)
+```
+
+If we try to copy our initial file into this table there would be no issues since the data is valid relative to the table structure. On the other hand, if we try to copy the processed file, PostgreSQL would throw an exception:
 
 ```
 Copy exception for table: null value in column "c" violates not-null constraint
@@ -79,32 +85,20 @@ Copy exception for table: null value in column "c" violates not-null constraint
 
 This issue is mentioned [here](https://bugs.python.org/msg396621).
 
-## Solutions
+## Solution
 
-Python's CSV parsing functionality is written in [CPython](https://github.com/python/cpython/blob/f4c03484da59049eb62a9bf7777b963e2267d187/Modules/_csv.c). My hopes of simply overriding a method were quickly shattered.
+Python's CSV parsing functionality is written in [CPython](https://github.com/python/cpython/blob/f4c03484da59049eb62a9bf7777b963e2267d187/Modules/_csv.c). My hopes of simply overriding a method were quickly shattered, so I had to find a workaround.
 
-### Update the Postgres model
-
-Update the table definition to allow NULL values for column `c`.
-
-This solution works for smaller apps that don't have multiple dependencies on table definitions. For my use case there would've been too many tables to change, queries to update, and issues to debug, and I opted for a different solution.
-
-### Use FORCE NOT NULL in the copy query
-
-A faster and less error prone solution is to update the copy SQL with the `FORCE NOT NULL` option for the problematic columns. This will forcefully insert an empty string instead of a NULL.
+I opted for updating the copy SQL with the `FORCE NOT NULL` option for the problematic columns.
 
 ```sql
 COPY table (a, b, c) FROM stdin WITH CSV HEADER DELIMITER as ',' FREEZE FORCE NOT NULL c;
 ```
 
-A couple things to consider:
-- You need to manually specify which columns to `FORCE NOT NULL` on, it's not dynamic.
-- This is not a solution to the parsing problem. You're still changing the original input data, and then trying to work around it.
+This forcefully inserts an empty string instead of a NULL for the specified columns.
 
-### Switch from Python to PostgreSQL transformations
+Another potential solution was to update the PostgreSQL table definition to allow NULL values for column `c`. This solution didn't work for my use case because there were too many dependencies on the table definition, and updating all the relevant queries and transformations wasn't worth the hassle.
 
-Instead of parsing the data with Python, you can copy the input file in an intermediary Postgres table, transform the data using SQL, then export the table as a CSV. As opposed to Python, Postgres does distinguish between NULL values and empty strings when exporting to CSV.
+### Conclusion
 
-### Update the Python CSV module
-
-I think the Python CSV module should be able to distinguish between NULL values and empty strings. In my opinion this would be the optimal solution.
+After experiencing this first hand I find it intriguing that the Python CSV module behaves the way it does, and forces developers into having to find workarounds. I think the Python CSV module should be able to properly distinguish between these two distinct values, and to maintain data integrity throughout the transformation phases. In my opinion this would be the optimal solution. I'm not a CPython developer so I am more than happy to hear (what I am missing) why I could be wrong.
