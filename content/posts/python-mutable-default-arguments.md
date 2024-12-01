@@ -1,5 +1,5 @@
 ---
-date: '2024-11-11'
+date: '2024-11-27'
 title: 'Beware of Python''s Mutable Default Arguments Anti-Pattern'
 draft: false
 comments: true
