@@ -1,7 +1,8 @@
 ---
 date: '2024-11-27'
 title: 'Beware of Python''s Mutable Default Arguments Anti-Pattern'
-draft: false
+draft: true
+tags: ["python"]
 comments: true
 showToc: false
 TocOpen: false

@@ -2,8 +2,9 @@
 date: '{{ .Date }}'
 title: '{{ replace .File.ContentBaseName "-" " " | title }}'
 draft: true
+tags: []
 comments: false
-showToc: true
+showToc: false
 TocOpen: false
 hidemeta: false
 # description: "Desc Text."

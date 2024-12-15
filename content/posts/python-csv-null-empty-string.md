@@ -22,9 +22,9 @@ ShowRssButtonInSectionTermList: false
 UseHugoToc: false
 ---
 
-Python can't distinguish between a NULL value and an empty string in a CSV file.
+Python can't distinguish between a null value and an empty string in a CSV file.
 
-Let's say we have a CSV file with 3 columns `a,b,c`. The first column contains a non empty string, the second column contains a NULL and the third column contains an empty string:
+Let's say we have a CSV file with 3 columns `a,b,c`. The first column contains a non empty string, the second column contains a null and the third column contains an empty string:
 
 ```
 a,b,c
@@ -64,13 +64,13 @@ a,b,c
 some string,,
 ```
 
-Both `b` and `c` columns now have a **NULL value**.
+Both `b` and `c` columns now have a **null value**.
 
-So `b` and `c` started out as NULL and empty string, were both read as empty strings, and are now written as NULLs. This is a mess! This issue is discussed [here](https://bugs.python.org/issue23041).
+So `b` and `c` started out as null and empty string, were both read as empty strings, and are now written as nulls. What a mess... The issue has been discussed [here](https://bugs.python.org/issue23041).
 
 ## My personal experience with this issue
 
-I worked on a service that processed incoming CSVs, wrote the processed data to other CSVs, and then [copied](https://www.postgresql.org/docs/9.2/sql-copy.html) the files into a PostgreSQL table. The table was defined to accept NULL values for column `b`, and to not accept NULL values for column `c`, although it could accept empty strings.
+I worked on a service that processed incoming CSVs, wrote the processed data to other CSVs, and then [copied](https://www.postgresql.org/docs/9.2/sql-copy.html) the files into a PostgreSQL table. The table was defined to accept null values for column `b`, and to not accept null values for column `c`, although it could accept empty strings.
 
 ```python
 b = models.CharField(null=True, blank=True)
@@ -95,9 +95,9 @@ I opted for updating the copy SQL with the `FORCE NOT NULL` option for the probl
 COPY table (a, b, c) FROM stdin WITH CSV HEADER DELIMITER as ',' FREEZE FORCE NOT NULL c;
 ```
 
-This forcefully inserts an empty string instead of a NULL for the specified columns.
+This forcefully inserts an empty string instead of a null for the specified columns.
 
-Another potential solution was to update the PostgreSQL table definition to allow NULL values for column `c`. This solution didn't work for my use case because there were too many dependencies on the table definition, and updating all the relevant queries and transformations wasn't worth the hassle.
+Another potential solution was to update the PostgreSQL table definition to allow null values for column `c`. This solution didn't work for my use case because there were too many dependencies on the table definition, and updating all the relevant queries and transformations wasn't worth the hassle.
 
 ### Conclusion
 
