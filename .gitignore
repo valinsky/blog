@@ -1,3 +1,4 @@
-# Ignore the locally create website
+# Ignore the locally created website
 /public/*
+
 .DS_Store
