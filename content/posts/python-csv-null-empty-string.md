@@ -1,5 +1,5 @@
 ---
-title: "The Pitfalls of NULLs and Empty Strings in Python's CSV Handling"
+title: "The pitfalls of nulls and empty strings in Python's CSV handling"
 date: 2024-11-03
 draft: true
 tags: ["python"]

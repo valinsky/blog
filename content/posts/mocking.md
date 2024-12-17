@@ -1,6 +1,6 @@
 ---
 date: '2024-12-15'
-title: 'How Mocking Works'
+title: 'How mocking works'
 draft: true
 tags: ["python"]
 comments: true
