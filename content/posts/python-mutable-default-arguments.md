@@ -23,7 +23,7 @@ UseHugoToc: false
 ---
 In Python, using mutable default arguments in function definitions is considered an anti-pattern because it can lead to unintended behaviour.
 
-To showcase this let's write a simple function that appends a number to a list.
+To showcase this let's write a simple function that appends a number to a list. Notice that `my_list` defaults to an empty list.
 ```python
 def append_to_list(number, my_list=[]):
     my_list.append(number)
