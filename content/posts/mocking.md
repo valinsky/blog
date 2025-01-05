@@ -1,7 +1,7 @@
 ---
-date: '2024-12-15'
+date: '2025-01-05'
 title: 'How mocking works'
-draft: true
+draft: false
 tags: ["python"]
 comments: true
 showToc: false
@@ -21,7 +21,7 @@ ShowWordCount: false
 ShowRssButtonInSectionTermList: false
 UseHugoToc: false
 ---
-One of the issues I struggled with at the beginning of my engineering journey was understanding how mocking works. For some reason I had a hard time wrapping my head around it, and when things finally clicked, I had an unforgettable AHA moment. In this article I'll try to reproduce that moment. This article is aimed at developers who want to better understand mocking and at my younger self as well. I wish I found this article back then.
+One of the issues I struggled with at the beginning of my engineering journey was understanding how mocking works. For some reason I had a hard time wrapping my head around it, and when things finally clicked, I had an incredibly satisfying AHA moment. This article is aimed at developers who are curios about mocking, as well as for my younger self. I wish I found this article back when I was still strugling with this concept.
 
 ### What's mocking
 
@@ -29,7 +29,14 @@ Mocking is used in unit testing to replace real objects with mock objects (mocks
 
 ### Setting things up
 
-To demonstrate how mocking works, let's write a function and a couple of unit tests, and explain the process of mocking along the way. A simple function that makes an API call to GitHub's users API and returns a json response is perfect for our use case. If you want to follow along, you can configure a virtual environment `python -m venv venv && source venv/bin/activate && pip install requests`, then create a file called `get_github_user.py` and paste the below code.
+To demonstrate how mocking works, let's write a function that makes an API call to [GitHub's users API](https://api.github.com/users) and returns a json response, and a couple of unit tests to test it. If you want to follow along, you can configure a virtual environment.
+
+```shell
+python -m venv venv && source venv/bin/activate && pip install requests
+```
+
+Then create a file called `get_github_user.py` and paste the below code.
+
 
 ```python
 import requests
@@ -41,16 +48,17 @@ def get_github_user(user: str) -> dict:
     return response.json()
 ```
 
-We need 2 unit tests to properly test our function. The first test covers the happy path scenario where the API request returns a response with a 200 status code and a dictionary. The second test covers the exception scenario where the API request returns a response with a non 200 status code and a reason. The `requests.get(f'https://api.github.com/users/{user}')` API call is our dependency. If we write our tests without mocking the dependency, the API request will be made on every test run. That is bad for a multitude of reasons:
-* GitHub's API has to behave as expected and not change for our tests to pass successfully.
+To properly test our function we'll need 2 unit tests. The first test covers the happy path scenario, where the API request returns a 200 response and a dictionary. The second test covers the exception scenario, where the API request returns a non 200 response and a reason. The `requests.get(f'https://api.github.com/users/{user}')` API call is our dependency. If we write our tests without mocking the dependency, the API request will be made on every test run. That is bad for a multitude of reasons:
+* GitHub's API has to behave as expected and not change.
 * Network issues can cause our tests to fail.
 * Test execution time can significantly increase.
 * Non-free API requests can substantially increase cost.
 * Higher bandwidth and resource consumption.
+* Hard to test multiple scenarios.
 
 ### Let's mock
 
-That's where mocking comes into play. Let's make use of it and and write the first unit test that covers the happy path. I use [pytest](https://docs.pytest.org/en/stable/) for testing and [pytest-mock](https://pytest-mock.readthedocs.io/en/latest/index.html) for mocking. I prefer `mocker`'s fixture syntax over the built in `unittest.mock` package, although the underlying concept is the same. If you're following along you can `pip install pytest pytest-mock` inside your virtual environment, create a `test.py` file in the same directory as `get_github_user.py`, and paste the below code.
+That's where mocking comes into play. Let's write our happy path unit test and mock the API dependency. I use [pytest](https://docs.pytest.org/en/stable/) for testing and [pytest-mock](https://pytest-mock.readthedocs.io/en/latest/index.html) for mocking. I prefer `mocker`'s fixture syntax over the built in `unittest.mock`, although the underlying concept is the same. If you're following along you can `pip install pytest pytest-mock` inside your virtual environment, create a `test.py` file in the same directory as `get_github_user.py`, and paste the below code.
 
 ```python
 import pytest
@@ -98,7 +106,7 @@ For this scenario we want our `get_github_user` function to raise an exception. 
 
 ### Diving deeper
 
-Let's explore what happens with the mocks behind the scenes. We can add a breakpoint in our `get_github_user` function right after `requests.get` and run the first test.
+Let's explore what happens with our mocks behind the scenes. We can add a breakpoint in our `get_github_user` function right after `requests.get` and run the first test.
 
 ``` python
 ...
@@ -108,7 +116,7 @@ if response.status_code != 200:
 ...
 ```
 
-When running the test, the Python interpreter will now bring up the [pdb](https://docs.python.org/3/library/pdb.html) and we can inspect the mock object(s) more in depth.
+When running the test, the Python interpreter will now bring up the [pdb](https://docs.python.org/3/library/pdb.html) and we can inspect the mock(s) more in depth.
 
 ```shell
 (Pdb) ll
@@ -139,7 +147,7 @@ There multiple mocks at play here:
 * `response.json` is a mock object, represented by `mock_get.return_value.json` in our test.
 * `response.json()` is represented by `mock_get.return_value.json.return_value` in the test. Similarly to `response.status_code`, this is not a mock since we explicitly assigned a value to it.
 
-Mocks can dynamically create other associated mocks without being explicitly defined. If you try to get the value of an undefined property or method of a mock, the code will not break, instead it will return another mock.
+Mocks can dynamically create other associated mocks without them being explicitly defined. If you try to get the value of an undefined property or method of a mock, the code will not break, instead it will return another mock.
 
 ```shell
 (Pdb) response.random_property
@@ -152,8 +160,8 @@ Even though `random_property` and `random_method()` were not defined in our test
 
 ### Conclusion
 
-I remember this idea of mocks automatically returning newly created mocks for undefined references, but returning their respective values if the references were previously defined was hard for me to wrap my head around for some reason. Like wtf are these magical dynamic objects that behave so weirdly? If you're in the same position I was in and are still struggling to understand them, I hope this article clears up at least some confusion. Also feel free to ask questions and I'd be happy to answer them.
+I remember this idea of mocks automatically returning newly created mocks for undefined references, and returning their respective values if the references were previously defined, was hard for me to wrap my head around for some reason. Like wtf are these magical dynamic objects that behave so weirdly? If you're in the same position I was in and are still struggling to understand them, I hope this article clears up at least some confusion. Feel free to ask questions below if mocking is still confusing to you.
 
 It's important to understand mocking. It's a great tool for developers to test different scenarios and to ensure code correctness. As we've seen, they are highly versatile and can easily map to specific use cases. However, that versatility comes with a caveat. The testing scenario has to be clearly understood and mocks should be used properly. Mocks are used to simulate expected behaviors, not to make unit tests pass. It's pretty easy to manipulate a mock in a way that makes that annoying unit test pass. When used correctly they're very powerful and can significantly improve overall code quality.
 
-As a rule of thumb, mocks are used in unit tests. Integration tests shouldn't use them. There are situations where not every dependency needs to be mocked in unit tests though. I worked on multiple services that used a local database when running unit tests and the database calls were not mocked. It depends on the use case. Overall mocks are great and I've been using them extensively in almost all of my projects.
+Integration tests shouldn't use mocks. They are generally used in unit tests to mock dependencies. Not every dependency needs to be mocked though. I worked on multiple services that used a local database when running unit tests and the database calls were not mocked. It depends on the use case. Overall mocking is an invaluable tool and a must-know technique for every serious developer
