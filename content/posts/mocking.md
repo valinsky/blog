@@ -1,7 +1,7 @@
 ---
 date: '2025-01-05'
 title: 'How mocking works'
-draft: true
+draft: false
 tags: ["python"]
 comments: true
 showToc: false
