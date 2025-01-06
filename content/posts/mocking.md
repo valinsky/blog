@@ -44,13 +44,13 @@ Then create a file called `get_github_user.py` and paste the below code.
 import requests
 
 def get_github_user(user: str) -> dict:
-    response = requests.get(f'https://api.github.com/users/{user}')
+    response = requests.get(f"https://api.github.com/users/{user}")
     if response.status_code != requests.codes.ok:
         raise Exception(response.reason)
     return response.json()
 ```
 
-To properly test our function we'll need 2 unit tests. The first test covers the happy path scenario, where the API request returns a 200 response and a dictionary. The second test covers the exception scenario, where the API request returns a non 200 response and a reason. The `requests.get(f'https://api.github.com/users/{user}')` API call is our dependency. If we don't mock the dependency, the request will be made on every test run. Not mocking API calls in unit tests is bad for a multitude of reasons:
+To properly test our function we'll need 2 unit tests. The first test covers the happy path scenario, where the API request returns a 200 response and a dictionary. The second test covers the exception scenario, where the API request returns a non 200 response and a reason. The `requests.get(f"https://api.github.com/users/{user}")` API call is our dependency. If we don't mock the dependency, the request will be made on every test run. Not mocking API calls in unit tests is bad for a multitude of reasons:
 * GitHub's API has to behave as expected and not change.
 * Network issues can cause the unit tests to fail.
 * Test execution time can significantly increase.
@@ -112,7 +112,7 @@ Let's actually look at our mocks behind the scenes. We can add a breakpoint in o
 
 ``` python
 ...
-response = requests.get(f'https://api.github.com/users/{user}')
+response = requests.get(f"https://api.github.com/users/{user}")
 breakpoint()
 if response.status_code != 200:
 ...
@@ -123,7 +123,7 @@ The Python interpreter will now bring up the [pdb](https://docs.python.org/3/lib
 ```shell
 (Pdb) ll
 4     def get_github_user(user: str) -> dict:
-5         response = requests.get(f'https://api.github.com/users/{user}')
+5         response = requests.get(f"https://api.github.com/users/{user}")
 6         breakpoint()
 7  ->     if response.status_code != requests.codes.ok:
 8             raise Exception(f'{response.reason}')
