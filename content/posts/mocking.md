@@ -76,7 +76,7 @@ def test_get_github_user(mocker):
 
     json_response = get_github_user(user)
 
-    mock_get.assert_called_once_with(f'https://api.github.com/users/{user}')
+    mock_get.assert_called_once_with(f"https://api.github.com/users/{user}")
     assert json_response == {'login': f"{user}"}
 ```
 
@@ -126,7 +126,7 @@ The Python interpreter will now bring up the [pdb](https://docs.python.org/3/lib
 5         response = requests.get(f"https://api.github.com/users/{user}")
 6         breakpoint()
 7  ->     if response.status_code != requests.codes.ok:
-8             raise Exception(f'{response.reason}')
+8             raise Exception(response.reason)
 9         return response.json()
 (Pdb) requests.get
 <MagicMock name='get' id='4356032032'>
