@@ -21,15 +21,15 @@ ShowWordCount: false
 ShowRssButtonInSectionTermList: false
 UseHugoToc: false
 ---
-One of the issues I struggled with at the beginning of my engineering journey was understanding how mocking works. For some reason I had a hard time wrapping my head around it, and when things finally clicked, I had an incredibly satisfying AHA moment. This article is aimed at developers who are curios about mocking, as well as for my younger self. I wish I found this article back when I was still strugling with this concept.
+One of the issues I struggled with at the beginning of my engineering journey was understanding how mocking works. For some reason I had a hard time wrapping my head around it, and when things finally clicked, I had an incredibly satisfying AHA moment. This article is aimed at developers who are curious about mocking, as well as at my younger self. I wish I found this article back when I was still strugling with this concept.
 
 ### What's mocking
 
-Mocking is used in unit testing to replace real objects with mock objects (mocks). Mocks mimic the behavior of real objects and allow developers to test their code without relying on external dependencies. Dependencies such as API calls, database calls, environment variables, datetime objects, file-like objects, user input, etc, can be mocked. By having full control over their behavior, developers can use mocks to deterministically simulate and test specific scenarios.
+Mocking is used in unit testing to replace real objects with mock objects (mocks). Mocks mimic the behavior of real objects and allow developers to test their code without relying on external dependencies. Dependencies such as API calls, database calls, environment variables, datetime objects, file-like objects, and user input can be mocked. By having full control over their behavior, developers can use mocks to deterministically simulate and test specific scenarios.
 
 ### Setting things up
 
-To demonstrate how mocking works, let's write a function that makes an API call to [GitHub's users API](https://api.github.com/users) and returns a json response, and a couple of unit tests to test it. If you want to follow along, you can configure a virtual environment.
+To demonstrate how mocking works, let's write a function that makes an API call to [GitHub's users API](https://api.github.com/users) and a couple of unit tests to test it. If you want to follow along, you can configure a virtual environment.
 
 ```shell
 python -m venv venv && source venv/bin/activate && pip install requests
@@ -44,13 +44,13 @@ import requests
 def get_github_user(user: str) -> dict:
     response = requests.get(f'https://api.github.com/users/{user}')
     if response.status_code != requests.codes.ok:
-        raise Exception(f'Exception: {response.reason}')
+        raise Exception(response.reason)
     return response.json()
 ```
 
-To properly test our function we'll need 2 unit tests. The first test covers the happy path scenario, where the API request returns a 200 response and a dictionary. The second test covers the exception scenario, where the API request returns a non 200 response and a reason. The `requests.get(f'https://api.github.com/users/{user}')` API call is our dependency. If we write our tests without mocking the dependency, the API request will be made on every test run. That is bad for a multitude of reasons:
+To properly test our function we'll need 2 unit tests. The first test covers the happy path scenario, where the API request returns a 200 response and a dictionary. The second test covers the exception scenario, where the API request returns a non 200 response and a reason. The `requests.get(f'https://api.github.com/users/{user}')` API call is our dependency. If we don't mock the dependency, the request will be made on every test run. Not mocking API calls in unit tests is bad for a multitude of reasons:
 * GitHub's API has to behave as expected and not change.
-* Network issues can cause our tests to fail.
+* Network issues can cause the unit tests to fail.
 * Test execution time can significantly increase.
 * Non-free API requests can substantially increase cost.
 * Higher bandwidth and resource consumption.
@@ -58,7 +58,7 @@ To properly test our function we'll need 2 unit tests. The first test covers the
 
 ### Let's mock
 
-That's where mocking comes into play. Let's write our happy path unit test and mock the API dependency. I use [pytest](https://docs.pytest.org/en/stable/) for testing and [pytest-mock](https://pytest-mock.readthedocs.io/en/latest/index.html) for mocking. I prefer `mocker`'s fixture syntax over the built in `unittest.mock`, although the underlying concept is the same. If you're following along you can `pip install pytest pytest-mock` inside your virtual environment, create a `test.py` file in the same directory as `get_github_user.py`, and paste the below code.
+Let's write our happy path unit test and mock the API call. I used [pytest](https://docs.pytest.org/en/stable/) for testing and [pytest-mock](https://pytest-mock.readthedocs.io/en/latest/index.html) for mocking. I prefer `mocker`'s fixture syntax over the built in `unittest.mock`, although the underlying concept is the same. If you're following along, you can `pip install pytest pytest-mock` inside your virtual environment, create a `test.py` file in the same directory as `get_github_user.py`, and paste the below code.
 
 ```python
 import pytest
@@ -84,7 +84,7 @@ First, we mock the API call via `mocker.patch('get_github_user.requests.get')`. 
 
 Second, we call `get_github_user` and capture the response.
 
-Lastly, we assert that `requests.get`, our mock object, was properly called and that the function returns the expected response. Mocks offer you the ability to assert how they're called, if they're called, how many times they're called and with what parameters. For our use case, we simply need to assert our mock was called only once with the proper value.
+Lastly, we assert that our mock was properly called and the function returns the expected response. Mocks offer you the ability to assert how they're called, if they're called, how many times they're called and with what parameters. For our use case, we simply need to assert our mock was called only once with the proper value.
 
 Now if you run `pytest test.py` in your preferred terminal you should see the test passing.
 
@@ -102,11 +102,11 @@ def test_get_github_user_exception(mocker):
     assert f"{e.value}" == reason
 ```
 
-For this scenario we want our `get_github_user` function to raise an exception. To achieve this, we configure our mock with a `status_code` != 200 and a `reason` property. We then assert that our function raises an exception via `pytest.raises` and ensure the exception message is correct. Running `pytest test.py` now should display both tests passing.
+For this scenario, we want `get_github_user` to raise an exception. To achieve this, we configure our mock with a `status_code` != 200 and a `reason` property. We then assert that the exception was raised via `pytest.raises` and ensure the exception message is correct. If you run `pytest test.py` now you should see both tests passing.
 
 ### Diving deeper
 
-Let's explore what happens with our mocks behind the scenes. We can add a breakpoint in our `get_github_user` function right after `requests.get` and run the first test.
+Let's actually look at our mocks behind the scenes. We can add a breakpoint in our `get_github_user` function right after `requests.get` and run the first test.
 
 ``` python
 ...
@@ -116,7 +116,7 @@ if response.status_code != 200:
 ...
 ```
 
-When running the test, the Python interpreter will now bring up the [pdb](https://docs.python.org/3/library/pdb.html) and we can inspect the mock(s) more in depth.
+The Python interpreter will now bring up the [pdb](https://docs.python.org/3/library/pdb.html) and we can inspect the mocks more in depth.
 
 ```shell
 (Pdb) ll
