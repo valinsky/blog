@@ -32,7 +32,9 @@ Mocking is used in unit testing to replace real objects with mock objects (mocks
 To demonstrate how mocking works, let's write a function that makes an API call to [GitHub's users API](https://api.github.com/users) and a couple of unit tests to test it. If you want to follow along, you can configure a virtual environment.
 
 ```shell
-python -m venv venv && source venv/bin/activate && pip install requests
+python -m venv venv
+source venv/bin/activate
+pip install requests
 ```
 
 Then create a file called `get_github_user.py` and paste the below code.
