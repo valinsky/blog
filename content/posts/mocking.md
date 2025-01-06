@@ -77,7 +77,7 @@ def test_get_github_user(mocker):
     json_response = get_github_user(user)
 
     mock_get.assert_called_once_with(f'https://api.github.com/users/{user}')
-    assert json_response == {'login': f'{user}'}
+    assert json_response == {'login': f"{user}"}
 ```
 
 The unit test is structured in 3 parts: variables setup and mocking, function call, assertions.
