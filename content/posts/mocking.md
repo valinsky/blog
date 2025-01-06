@@ -60,7 +60,9 @@ To properly test our function we'll need 2 unit tests. The first test covers the
 
 ### Let's mock
 
-Let's write our happy path unit test and mock the API call. I used [pytest](https://docs.pytest.org/en/stable/) for testing and [pytest-mock](https://pytest-mock.readthedocs.io/en/latest/index.html) for mocking. I prefer `mocker`'s fixture syntax over the built in `unittest.mock`, although the underlying concept is the same. If you're following along, you can `pip install pytest pytest-mock` inside your virtual environment, create a `test.py` file in the same directory as `get_github_user.py`, and paste the below code.
+Let's write our happy path unit test and mock the API call. I used [pytest](https://docs.pytest.org/en/stable/) for testing and [pytest-mock](https://pytest-mock.readthedocs.io/en/latest/index.html) for mocking. I prefer `mocker`'s fixture syntax over the built in `unittest.mock`, although the underlying concept is the same.
+
+If you're following along, you can `pip install pytest pytest-mock` inside your virtual environment, create a `test.py` file in the same directory as `get_github_user.py`, and paste the below code.
 
 ```python
 import pytest
