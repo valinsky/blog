@@ -74,7 +74,7 @@ def test_get_github_user(mocker):
     user = 'valinsky'
     mock_get = mocker.patch('get_github_user.requests.get')
     mock_get.return_value.status_code = requests.codes.ok
-    mock_get.return_value.json.return_value = {'login': f'{user}'}
+    mock_get.return_value.json.return_value = {'login': f"{user}"}
 
     json_response = get_github_user(user)
 
