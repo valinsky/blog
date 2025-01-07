@@ -51,7 +51,7 @@ def get_github_user(user: str) -> dict:
 ```
 
 To properly test our function we'll need 2 unit tests. The first test covers the happy path scenario, where the API request returns a 200 response and a dictionary. The second test covers the exception scenario, where the API request returns a non 200 response and a reason. The `requests.get(f"https://api.github.com/users/{user}")` API call is our dependency. If we don't mock the dependency, the request will be made on every test run. Not mocking API calls in unit tests is bad for a multitude of reasons:
-* GitHub's API has to behave as expected and not change.
+* The API has to behave as expected and not change.
 * Network issues can cause the unit tests to fail.
 * Test execution time can significantly increase.
 * Non-free API requests can substantially increase cost.
