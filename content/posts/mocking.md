@@ -106,11 +106,13 @@ def test_get_github_user_exception(mocker):
     assert f"{e.value}" == reason
 ```
 
-For this scenario, we want `get_github_user` to raise an exception. To achieve this, we configure our mock with a `status_code` != 200 and a `reason` property. We then assert that the exception was raised via `pytest.raises` and ensure the exception message is correct. If you run `pytest test.py` now you should see both tests passing.
+In order for `get_github_user` to raise an exception, we configure our mock with a `status_code` != 200 and a `reason` property. We then assert that the exception was raised via `pytest.raises` and ensure the exception message is correct.
+
+If you run `pytest test.py` now you should see both tests passing.
 
 ### Diving deeper
 
-Let's actually look at our mocks behind the scenes. We can add a breakpoint in our `get_github_user` function right after `requests.get` and run the first test.
+Let's take a closer look at our mocks behind the scenes. We can add a breakpoint in our `get_github_user` function right after `requests.get` and run the first test.
 
 ``` python
 ...
