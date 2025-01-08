@@ -1,6 +1,6 @@
 ---
 date: '2024-11-27'
-title: 'Beware of Python''s mutable default arguments anti-pattern'
+title: 'Beware of Python''s mutable default arguments'
 draft: false
 tags: ["python"]
 comments: true
