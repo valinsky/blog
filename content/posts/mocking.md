@@ -164,7 +164,7 @@ Mocks can dynamically create other associated mocks without them being explicitl
 
 Even though `random_property` and `random_method()` were not defined in our test, Python automatically returns new mocks when they are referenced as part of another mock. Notice we didn't explicitly define `mock_get.return_value.json` in our test, we only defined what the return value of that object being called is. No exception was raised when we tried to access it above, Python just went along with it. Mocks are cool like that. If `random_property` and `random_method()` were defined in our test to return a specific value, that value would've been returned instead of a mock, similar to `status_code` and `json()`.
 
-### Conclusion
+### Closing Thoughts
 
 I remember this idea of mocks automatically returning newly created mocks for undefined references, and returning their respective values if the references were previously defined, was hard for me to wrap my head around for some reason. Like wtf are these magical dynamic objects that behave so weirdly? If you're in the same position I was in and are still struggling to understand them, I hope this article clears up at least some confusion. Feel free to ask questions below if mocking is still confusing to you.
 
