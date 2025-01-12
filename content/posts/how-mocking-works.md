@@ -2,7 +2,7 @@
 date: '2025-01-05'
 title: 'How mocking works'
 draft: false
-tags: ["python"]
+tags: ["python", "mocking", "programming"]
 comments: true
 showToc: false
 TocOpen: false

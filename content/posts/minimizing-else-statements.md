@@ -5,7 +5,7 @@ draft: false
 comments: true
 # weight: 1
 # aliases: ["/first"]
-tags: ["clean code", "python"]
+tags: ["clean code", "python", "programming"]
 showToc: false
 TocOpen: false
 hidemeta: false

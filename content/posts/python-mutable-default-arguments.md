@@ -2,7 +2,7 @@
 date: '2024-11-27'
 title: 'Beware of Python''s mutable default arguments'
 draft: false
-tags: ["python"]
+tags: ["python", "programming"]
 comments: true
 showToc: false
 TocOpen: false
