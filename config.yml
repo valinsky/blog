@@ -51,6 +51,7 @@ languages:
 
     # custom params for each language should be under [langcode].parms - hugo v0.120.0
     params:
+      dateFormat: January 2006
       homeInfoParams:
         Title: Hey
         Content: I'm Vali, a Senior Software Engineer with a passion for clean code, knowledge sharing and writing.
