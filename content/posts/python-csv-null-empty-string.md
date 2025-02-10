@@ -18,7 +18,7 @@ ShowReadingTime: true
 ShowBreadCrumbs: false
 ShowPostNavLinks: false
 ShowWordCount: false
-ShowRssButtonInSectionTermList: false
+ShowRssButtonInSectionTermList: true
 UseHugoToc: false
 ---
 

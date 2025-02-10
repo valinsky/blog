@@ -18,7 +18,7 @@ ShowReadingTime: true
 ShowBreadCrumbs: false
 ShowPostNavLinks: false
 ShowWordCount: false
-ShowRssButtonInSectionTermList: false
+ShowRssButtonInSectionTermList: true
 UseHugoToc: false
 ---
 In Python, using mutable default arguments in function definitions is considered an anti-pattern because it can lead to unintended behaviour.

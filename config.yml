@@ -63,6 +63,8 @@ languages:
           url: https://github.com/valinsky
         - name: linkedin
           url: https://www.linkedin.com/in/valivoicu
+        - name: rss
+          url: https://www.valinsky.dev/index.xml
         # - name: KoFi
           # title: Buy me a Ko-Fi :)
           # url: "https://ko-fi.com/adityatelange"
@@ -90,6 +92,7 @@ params:
   ShowBreadCrumbs: false
   ShowCodeCopyButtons: true
   ShowRssButtonInSectionTermList: true
+  ShowFullTextinRSS: true
   ShowAllPagesInArchive: true
   ShowPageNums: true
   ShowToc: true

@@ -18,7 +18,7 @@ ShowReadingTime: true
 ShowBreadCrumbs: false
 ShowPostNavLinks: false
 ShowWordCount: false
-ShowRssButtonInSectionTermList: false
+ShowRssButtonInSectionTermList: true
 UseHugoToc: false
 ---
 One of the issues I struggled with at the beginning of my engineering journey was understanding how mocking works. For some reason I had a hard time wrapping my head around it, and when things finally clicked, I had an incredibly satisfying AHA moment. This article is aimed at developers who are curious about mocking, as well as at my younger self. I wish I found this article back when I was still strugling with this concept.

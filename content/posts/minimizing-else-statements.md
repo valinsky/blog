@@ -20,7 +20,7 @@ ShowReadingTime: true
 ShowBreadCrumbs: false
 ShowPostNavLinks: false
 ShowWordCount: false
-ShowRssButtonInSectionTermList: false
+ShowRssButtonInSectionTermList: true
 UseHugoToc: false
 ---
 One way to keep production code clean and simple is by minimizing the usage of `else` statements. Conditional branching can negatively impact your code, by making it overcomplicated and hard to test. I actively look for ways to avoid using `else` whenever I write code. Below I go through a few simple, abstract Python examples to showcase how the same logic can be written with and without `else`, the latter improving code quality. These are simple patterns that can get you a long way in complex code bases.
