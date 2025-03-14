@@ -1,14 +1,12 @@
 ---
-title: "The pitfalls of nulls and empty strings in Python's CSV handling"
-date: 2024-11-03
+title: "Python CSV quirks"
+date: 2025-04-01
 draft: true
 tags: ["python"]
 showToc: false
 TocOpen: false
 hidemeta: false
 comments: false
-# description: "Desc Text."
-# canonicalURL: "https://canonical.url/to/page"
 disableHLJS: true # to disable highlightjs
 disableShare: true
 disableHLJS: false
@@ -24,7 +22,7 @@ UseHugoToc: false
 
 Python can't distinguish between a null value and an empty string in a CSV file.
 
-Let's say we have a CSV file with 3 columns `a,b,c`. The first column contains a non empty string, the second column contains a null and the third column contains an empty string:
+Let's say we have a CSV file with 3 columns `a,b,c`. The first column contains a non-empty string, the second column contains a null, and the third column contains an empty string:
 
 ```
 a,b,c
@@ -66,30 +64,34 @@ some string,,
 
 Both `b` and `c` columns now have a **null value**.
 
-So `b` and `c` started out as null and empty string, were both read as empty strings, and are now written as nulls. What a mess... The issue has been discussed [here](https://bugs.python.org/issue23041).
+So `b` and `c` started out as null and empty string, were both read as empty strings, and are now written as nulls.
+
+<img src="/img/confused.png" alt="Description of the image" width="300" height="300">
 
 ## My personal experience with this issue
 
-I worked on a service that processed incoming CSVs, wrote the processed data to other CSVs, and then [copied](https://www.postgresql.org/docs/9.2/sql-copy.html) the files into a PostgreSQL table. The table was defined to accept null values for column `b`, and to not accept null values for column `c`, although it could accept empty strings.
+I worked on a service that processed incoming CSVs, wrote the processed data to other CSVs, and then [sql copied](https://www.postgresql.org/docs/17/sql-copy.html) the files into a PostgreSQL table. The table was defined to accept null values for column `b`, and to not accept null values for column `c`, although it could accept empty strings.
 
 ```python
 b = models.CharField(null=True, blank=True)
 c = models.CharField(null=False, blank=True)
 ```
 
-If we try to copy our initial file into this table there would be no issues since the data is valid relative to the table structure. On the other hand, if we try to copy the processed file, PostgreSQL would throw an exception:
+If we try to copy our initial file into this table, there would be no issues since the data is valid relative to the table structure. On the other hand, if we try to copy the processed file, PostgreSQL would throw an exception:
 
 ```
 Copy exception for table: null value in column "c" violates not-null constraint
 ```
 
-This issue is mentioned [here](https://bugs.python.org/msg396621).
+This issue has been reported [here](https://bugs.python.org/msg396621).
 
 ## Solution
 
-Python's CSV parsing functionality is written in [CPython](https://github.com/python/cpython/blob/f4c03484da59049eb62a9bf7777b963e2267d187/Modules/_csv.c). My hopes of simply overriding a method were quickly shattered, so I had to find a workaround.
+Python's CSV parsing functionality is written in [CPython](https://github.com/python/cpython/blob/f4c03484da59049eb62a9bf7777b963e2267d187/Modules/_csv.c), so my hopes of simply overriding some method to parse the CSV according to my needs were quickly shattered.
 
-I opted for updating the copy SQL with the `FORCE NOT NULL` option for the problematic columns.
+Updating the PostgreSQL table definition to allow null values for column `c` also wasn't an option for me at the time.
+
+The solution I ultimately opted for was to update the copy SQL with the `FORCE NOT NULL` option for the problematic columns.
 
 ```sql
 COPY table (a, b, c) FROM stdin WITH CSV HEADER DELIMITER as ',' FREEZE FORCE NOT NULL c;
@@ -97,8 +99,6 @@ COPY table (a, b, c) FROM stdin WITH CSV HEADER DELIMITER as ',' FREEZE FORCE NO
 
 This forcefully inserts an empty string instead of a null for the specified columns.
 
-Another potential solution was to update the PostgreSQL table definition to allow null values for column `c`. This solution didn't work for my use case because there were too many dependencies on the table definition, and updating all the relevant queries and transformations wasn't worth the hassle.
+### Closing thoughts
 
-### Conclusion
-
-After experiencing this first hand I find it intriguing that the Python CSV module behaves the way it does, and forces developers into having to find workarounds. I think the Python CSV module should be able to properly distinguish between these two distinct values, and to maintain data integrity throughout the transformation phases. In my opinion this would be the optimal solution. I'm not a CPython developer so I am more than happy to hear (what I am missing) why I could be wrong.
+After experiencing this firsthand in a production environment, I find it intriguing that Python's CSV module behaves the way it does. Nulls and empty strings are fundamentally different types, and the inability to properly distinguish between them forces developers to seek workarounds for what seems like a basic issue. Then again, I'm not a CPython developer, and I may not be aware of all the arguments behind its current behavior. One can only hope for improvements in the future.
