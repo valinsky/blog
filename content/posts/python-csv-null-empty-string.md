@@ -62,7 +62,7 @@ a,b,c
 some string,,
 ```
 
-Both `b` and `c` columns now have a **null value**.
+Both `b` and `c` columns now contain a **null value**.
 
 So `b` and `c` started out as null and empty string, were both read as empty strings, and are now written as nulls.
 
