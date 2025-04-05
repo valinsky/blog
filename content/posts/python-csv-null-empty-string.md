@@ -1,7 +1,7 @@
 ---
 title: "Python CSV quirks"
 date: 2025-04-01
-draft: true
+draft: false
 tags: ["python"]
 showToc: false
 TocOpen: false
