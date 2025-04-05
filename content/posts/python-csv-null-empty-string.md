@@ -70,7 +70,7 @@ So `b` and `c` started out as null and empty string, were both read as empty str
 
 ## My personal experience with this issue
 
-I worked on a service that processed incoming CSVs, wrote the processed data to other CSVs, and then [sql copied](https://www.postgresql.org/docs/17/sql-copy.html) the files into a PostgreSQL table. The table was defined to accept null values for column `b`, and to not accept null values for column `c`, although it could accept empty strings.
+I worked on a service that processed incoming CSVs, wrote the processed data to other CSVs, and then [SQL copied](https://www.postgresql.org/docs/17/sql-copy.html) the files into a PostgreSQL table. The table was defined to accept null values for column `b`, and to not accept null values for column `c`, although it could accept empty strings.
 
 ```python
 b = models.CharField(null=True, blank=True)
@@ -91,7 +91,7 @@ Python's CSV parsing functionality is written in [CPython](https://github.com/py
 
 Updating the PostgreSQL table definition to allow null values for column `c` also wasn't an option for me at the time.
 
-The solution I ultimately opted for was to update the copy SQL with the `FORCE NOT NULL` option for the problematic columns.
+The solution I ultimately opted for was to update the copy SQL command with the `FORCE NOT NULL` option for the problematic columns.
 
 ```sql
 COPY table (a, b, c) FROM stdin WITH CSV HEADER DELIMITER as ',' FREEZE FORCE NOT NULL c;
