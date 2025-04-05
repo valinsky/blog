@@ -103,8 +103,8 @@ This forcefully inserts an empty string instead of a null for the specified colu
 
 After experiencing this firsthand in a production environment, I find it intriguing that Python's CSV module behaves the way it does. Nulls and empty strings are fundamentally different types, and the inability to properly distinguish between them forces developers to seek workarounds for what seems like a basic issue.
 
-Yomguithereal's CSV love letter references [CSV's dinamically typed](https://github.com/medialab/xan/blob/master/docs/LOVE_LETTER.md#6-csv-is-dynamically-typed) nature, and how it *could* be beneficial if handled properly.
+This [CSV love letter](https://github.com/medialab/xan/blob/master/docs/LOVE_LETTER.md) that I found on HN's front page, which I generally agree with, references CSV's dinamically typed nature, and how it *could* be beneficial if handled properly.
 
 > *Consider JavaScript, for instance, that is unable to represent 64 bits integers. Or what languages, frameworks and libraries consider as null values (don't get me started on pandas and null values). CSV lets you parse values as you see fit and is in fact dynamically typed. But this is as much of a strength as it can become a potential footgun if you are not careful.*
 
-I can't help but feel that Python is shooting itself in the tail here, with a relatively small-caliber bullet, true, but the wound could get infected and cause other more serious problems. Then again, I'm not a CPython developer, and I may not be aware of all the arguments behind its current behavior. One can only hope for improvements in the future.
+I think the freedom that CSV provides is yet another case of `with great power comes great responsibility`, and I can't help but feel that Python is shooting itself in the tail here, with a relatively small-caliber bullet, true, but the wound could get infected and lead to headaches and wasted time. Then again, I'm not a CPython developer, and I may not be aware of all the arguments behind its current behavior. One can only hope for improvements in the future.
