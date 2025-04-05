@@ -6,7 +6,7 @@ tags: ["python"]
 showToc: false
 TocOpen: false
 hidemeta: false
-comments: false
+comments: true
 disableHLJS: true # to disable highlightjs
 disableShare: true
 disableHLJS: false
