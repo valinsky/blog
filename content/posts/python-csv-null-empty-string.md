@@ -87,7 +87,7 @@ This issue has been reported [here](https://bugs.python.org/msg396621).
 
 ## Solution
 
-Python's CSV parsing functionality is written in [CPython](https://github.com/python/cpython/blob/f4c03484da59049eb62a9bf7777b963e2267d187/Modules/_csv.c), so my hopes of simply overriding some method to parse the CSV according to my needs were quickly shattered.
+Python's CSV parsing functionality is written in [CPython](https://github.com/python/cpython/blob/f4c03484da59049eb62a9bf7777b963e2267d187/Modules/_csv.c), so my hopes of simply overriding a method to parse the CSV according to my needs were quickly shattered.
 
 Updating the PostgreSQL table definition to allow null values for column `c` also wasn't an option for me at the time.
 
@@ -101,4 +101,10 @@ This forcefully inserts an empty string instead of a null for the specified colu
 
 ### Closing thoughts
 
-After experiencing this firsthand in a production environment, I find it intriguing that Python's CSV module behaves the way it does. Nulls and empty strings are fundamentally different types, and the inability to properly distinguish between them forces developers to seek workarounds for what seems like a basic issue. Then again, I'm not a CPython developer, and I may not be aware of all the arguments behind its current behavior. One can only hope for improvements in the future.
+After experiencing this firsthand in a production environment, I find it intriguing that Python's CSV module behaves the way it does. Nulls and empty strings are fundamentally different types, and the inability to properly distinguish between them forces developers to seek workarounds for what seems like a basic issue.
+
+Yomguithereal's CSV love letter references [CSV's dinamically typed](https://github.com/medialab/xan/blob/master/docs/LOVE_LETTER.md#6-csv-is-dynamically-typed) nature, and how it *could* be beneficial if handled properly.
+
+> *Consider JavaScript, for instance, that is unable to represent 64 bits integers. Or what languages, frameworks and libraries consider as null values (don't get me started on pandas and null values). CSV lets you parse values as you see fit and is in fact dynamically typed. But this is as much of a strength as it can become a potential footgun if you are not careful.*
+
+I can't help but feel that Python is shooting itself in the tail here, with a relatively small-caliber bullet, true, but the wound could get infected and cause other more serious problems. Then again, I'm not a CPython developer, and I may not be aware of all the arguments behind its current behavior. One can only hope for improvements in the future.
