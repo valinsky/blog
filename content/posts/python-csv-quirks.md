@@ -89,7 +89,7 @@ This issue has been reported [here](https://bugs.python.org/msg396621).
 
 Python's CSV parsing functionality is written in [CPython](https://github.com/python/cpython/blob/f4c03484da59049eb62a9bf7777b963e2267d187/Modules/_csv.c), so my hopes of simply overriding a method to parse the CSV according to my needs were quickly shattered.
 
-Updating the PostgreSQL table definition to allow null values for column `c` also wasn't an option for me at the time.
+One solution would've been to update the PostgreSQL table definition to allow null values for column `c`. Unfortunately that wasn't an option at the time because there were too many cross-functional dependencies on that column as it was currently defined.
 
 The solution I ultimately opted for was to update the copy SQL command with the `FORCE NOT NULL` option for the problematic columns.
 
