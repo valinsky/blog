@@ -26,7 +26,7 @@ ShowRssButtonInSectionTermList: false
 UseHugoToc: false
 ---
 
-I'm a Senior Software Engineer with a focus on backend technologies. I specialize in distributed systems architecture, database management, scalable REST APIs, Python, and AWS.
+I'm a senior software engineer with a focus on backend technologies. I specialize in distributed systems architecture, database management, scalable REST APIs, Python, and AWS.
 
 I've held senior roles at multiple organizations, including Verizon, EAB, and currently Anaconda.
 
