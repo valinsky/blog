@@ -66,7 +66,7 @@ Both `b` and `c` columns now contain a **null value**.
 
 So `b` and `c` started out as null and empty string, were both read as empty strings, and are now written as nulls.
 
-<img src="/img/confused.png" alt="Description of the image" width="300" height="300">
+<img src="/img/confused.png" alt="Confused" width="300" height="300">
 
 ## My personal experience with this issue
 
