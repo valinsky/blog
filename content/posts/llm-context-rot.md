@@ -69,6 +69,8 @@ while user_prompt := get_user_prompt():
     print(prompt_response)
 ```
 
+<br>
+
 It's well known that LLMs sometimes hallucinate. I once read that LLMs, in fact, always hallucinate; it's just that sometimes they also get things right. I like that definition more. The accuracy of their responses is probabilistically determined. When you include incorrect data in the context, the probability of getting incorrect responses increases.
 
 Additionally, I've seen LLMs reuse previous incorrect approaches, even after explicitly being told they were incorrect.
@@ -126,6 +128,8 @@ Additionally, I've seen LLMs reuse previous incorrect approaches, even after exp
   }
 }
 </style>
+
+<br>
 
 In my opinion, all LLM chats inevitably converge toward context rot as their context becomes increasingly polluted. I've had to ditch chats countless times because the LLM started spewing nonsense and no corrective prompts could put it back on track. It's worth noting that I'm far from being a [good prompt engineer](https://addyo.substack.com/p/the-prompt-engineering-playbook-for) and I'm sure my noob level prompting skills didn't help.
 
