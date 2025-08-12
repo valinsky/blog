@@ -22,7 +22,7 @@ ShowRssButtonInSectionTermList: true
 UseHugoToc: false
 ---
 
-LLMs are context-driven services. You feed them some context, they generate a response. The context represents the entire chat conversation (or as much of it as fits within the
+LLMs are context-driven services. You feed them some context and they generate a response. The context represents the entire chat conversation (or as much of it as fits within the
 <span class="fancy-tooltip" style="position:relative;cursor:pointer;border-bottom:1px dotted #888;">context window<span class="fancy-tooltip-text" style="
     display:inline-block;
     visibility:hidden;
@@ -131,6 +131,6 @@ Additionally, I've seen LLMs reuse previous incorrect approaches, even after exp
 
 <br>
 
-In my opinion, all LLM chats inevitably converge toward context rot as their context becomes increasingly polluted. I've had to ditch chats countless times because the LLM started spewing nonsense and no corrective prompts could put it back on track. It's worth noting that I'm far from being a [good prompt engineer](https://addyo.substack.com/p/the-prompt-engineering-playbook-for) and I'm sure my noob level prompting skills didn't help.
+In my opinion, all LLM chats inevitably converge toward context rot as their context becomes increasingly polluted. I've had to ditch chats countless times because the LLM started spewing nonsense and no corrective prompts could put it back on track. I have to admit that my [prompting skills](https://addyo.substack.com/p/the-prompt-engineering-playbook-for) definitely need improvement though.
 
-The solution is simple, open a new chat and rework the context using the lessons learned from previous chats. Your prompts will likely be better, and you'll probably get better results this time around.
+The solution is simple, open a new chat and rework the context using the lessons learned from previous chats. Your prompts will likely be better this time around, and you'll probably get better results.
