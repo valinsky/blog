@@ -1,7 +1,7 @@
 ---
-date: '2025-08-10T19:50:09-04:00'
+date: '2025-08-11'
 title: 'LLM Context Rot'
-draft: true
+draft: false
 tags: []
 comments: true
 showToc: false
@@ -22,7 +22,7 @@ ShowRssButtonInSectionTermList: true
 UseHugoToc: false
 ---
 
-LLMs are context driven services. You give them some context, they provide a response. The context represents the entire chat conversation, or as much of it as it fits within the
+LLMs are context-driven services. You feed them some context, they generate a response. The context represents the entire chat conversation (or as much of it as fits within the
 <span class="fancy-tooltip" style="position:relative;cursor:pointer;border-bottom:1px dotted #888;">context window<span class="fancy-tooltip-text" style="
     display:inline-block;
     visibility:hidden;
@@ -40,7 +40,9 @@ LLMs are context driven services. You give them some context, they provide a res
     z-index:10;
     font-size:0.95em;
     pointer-events:none;
-  "> The maximum number of tokens it can process at once</span></span>, and any additional files attached to that conversation.
+  "> The maximum number of tokens it can process at once</span></span>), and any additional files attached to that conversation.
+
+  Context rot is when the LLM context has degraded so much that it becomes unusable.
 
 <style>
 .fancy-tooltip:hover > .fancy-tooltip-text {
@@ -55,7 +57,7 @@ LLMs are context driven services. You give them some context, they provide a res
 }
 </style>
 
-Excluding the response from the initial prompt, all other responses are a result of the current prompt plus the chat history. This means that the LLM is using it's own previous responses as context for generating new responses.
+Excluding the response from the initial prompt, all other responses are a result of the current prompt plus the chat history. This means that the LLM is using its own previous responses as context for generating new responses.
 
 
 ```python
@@ -67,21 +69,64 @@ while user_prompt := get_user_prompt():
     print(prompt_response)
 ```
 
-It's well known that LLMs sometimes hallucinate.
+It's well known that LLMs sometimes hallucinate. I once read that LLMs, in fact, always hallucinate; it's just that sometimes they also get things right. I like that definition more. The accuracy of their responses is probabilistically determined. When you include incorrect data in the context, the probability of getting incorrect responses increases.
 
-<img src="/img/hallucination_doors_of_stone.jpg" alt="Doors of Stone Hallucination" width="400" height="400">
+Additionally, I've seen LLMs reuse previous incorrect approaches, even after explicitly being told they were incorrect.
 
-A definition that I like better is that LLMs, in fact, always hallucinate, it's just that sometimes they also get things right. The accuracy of their responses is probabilistically determined. When you include incorrect data in the context, the probability of getting incorrect responses increases.
+<div class="chat-list">
+  <div class="chat-bubble user">Do this thing</div>
+  <div class="chat-bubble assistant"><i>Incorrect approach</i></div>
+  <div class="chat-bubble user">That's incorrect, do it this way</div>
+  <div class="chat-bubble assistant"><i>Correct approach</i></div>
+  <div class="chat-bubble user">Now do this other thing</div>
+  <div class="chat-bubble assistant"><i>Reuses the same initial incorrect approach</i></div>
+</div>
 
-Additionally, I've seen LLMs reuse old, incorrect answers, even after explicitly being told they were incorrect.
+<style>
+.chat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  margin: 1em auto;
+  max-width: 450px;
+  align-items: stretch;
+}
+.chat-bubble {
+  max-width: 90%;
+  padding: 0.6em 1em;
+  border-radius: 1.2em;
+  font-size: 1em;
+  line-height: 1.4;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  word-break: break-word;
+}
+.chat-bubble.user {
+  align-self: flex-start;
+  background: #e0e7ff;
+  color: #222;
+}
+.chat-bubble.assistant {
+  align-self: flex-end;
+  background: #f1f5f9;
+  color: #333;
+  border: 1px solid #cbd5e1;
+}
+</style>
 
-> 1. Do this thing
-> 2. "Incorrect approach"
-> 3. No, do it this way
-> 4. "Correct approach"
-> 5. Now do this other thing
-> 6. "Uses a similar incorrect approach as 2"
+<style>
+@media (prefers-color-scheme: dark) {
+  .chat-bubble.user {
+    background: rgb(65, 66, 72);
+    color: #f4f4f5;
+  }
+  .chat-bubble.assistant {
+    background: rgb(40, 41, 46);
+    color: #e0e0e0;
+    border: 1px solid rgb(55, 56, 62);
+  }
+}
+</style>
 
-At some point the context gets polluted to the point of becoming unusable. It has been my experience that all LLM chats eventually converge towards context rot. I've had to ditch chats countless times because the LLM started spewing nonsense and no corrective prompts could put it back on track. Worth noting that I'm far from being a [good prompt engineer](https://addyo.substack.com/p/the-prompt-engineering-playbook-for) and I'm sure my prompting skills, or lack thereoff, didn't help.
+In my opinion, all LLM chats inevitably converge toward context rot as their context becomes increasingly polluted. I've had to ditch chats countless times because the LLM started spewing nonsense and no corrective prompts could put it back on track. It's worth noting that I'm far from being a [good prompt engineer](https://addyo.substack.com/p/the-prompt-engineering-playbook-for) and I'm sure my noob level prompting skills didn't help.
 
-The solution is simple. Open a new chat and rework the context using the lessons learned from previous chats. It works great.
+The solution is simple, open a new chat and rework the context using the lessons learned from previous chats. Your prompts will likely be better, and you'll probably get better results this time around.
