@@ -32,8 +32,17 @@ I've held senior roles at multiple organizations, including Verizon, EAB, and cu
 
 I'm passionate about clean code, knowledge sharing and writing, and I'm using this blog as an opportunity to showcase and further develop these skills.
 
-This website **is free of ads, affiliate links, sponsored posts, paywalls, and it doesn't contain any analytics or tracking code.** My goal is to create a no bs, content-first blog where I can freely share what I've learned over the years.
-
-The website is powered by [Hugo](https://gohugo.io/) and [PaperMod](https://github.com/adityatelange/hugo-PaperMod) and comments are powered by [giscus](https://github.com/giscus/giscus). Source code lives in my personal [GitHub repository](https://github.com/valinsky/blog). It's hosted on [GitHub Pages](https://pages.github.com/) and it adheres to [GitHub's privacy policy](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#data-collection).
+This website **is free of ads, affiliate links, sponsored posts, paywalls, and it doesn't contain any spyware or tracking code.** My goal is to create a no-bs, content-first blog where I can freely share what I've learned over the years.
 
 {{< social_icons >}}
+
+### Blog powered by:
+
+* [Hugo](https://gohugo.io/)
+* [PaperMod](https://github.com/adityatelange/hugo-PaperMod)
+* [giscus](https://github.com/giscus/giscus)
+* [Source Code](https://github.com/valinsky/blog)
+* [GitHub Pages](https://pages.github.com/)
+    * [GitHub Privacy Policy](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#data-collection)
+* [Cloudflare DNS](https://www.cloudflare.com/application-services/products/dns/)
+    * [Cloudflare Privacy Policy](https://www.cloudflare.com/privacypolicy/)
