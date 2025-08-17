@@ -32,7 +32,7 @@ I've held senior roles at multiple organizations, including Verizon, EAB, and cu
 
 I'm passionate about clean code, knowledge sharing and writing, and I'm using this blog as an opportunity to showcase and further develop these skills.
 
-This website **is free of ads, affiliate links, sponsored posts, paywalls, and it doesn't contain any spyware or tracking code.** My goal is to create a no-bs, content-first blog where I can freely share what I've learned over the years.
+This website **is free of ads, affiliate links, sponsored posts, paywalls, and google analytics.** My goal is to create a no-bs, content-first blog where I can freely share what I've learned over the years.
 
 {{< social_icons >}}
 
